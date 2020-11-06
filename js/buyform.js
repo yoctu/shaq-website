@@ -52,7 +52,7 @@ jQuery(document).ready(function($) {
     if (ferror) return false;
 
     $("#buyform").addClass("d-none");
-    $("#waitmessage").removeClass("d-none");
+    $("#waitmessage").addClass("show");
     fetch("https://manage.shaq.us.yoctu.solutions//api/container?key=jaimelephp&code=SHAQ" + Math.round(new Date().getTime() / 1000) + "&env=dev&email=" + $('#email').val() + "&name=" + $('#name').val() + "&tms=DEMO&sendmail=1", {
         method: 'POST',
         headers: {
@@ -60,11 +60,11 @@ jQuery(document).ready(function($) {
         }
     })
     .then(function(res) {
-      $("#waitmessage").addClass("d-none");
-      $("#sendmessage").removeClass("d-none");
+      $("#waitmessage").removeClass("show");
+      $("#sendmessage").addClass("show");
     })
     .catch(function(e){
-      $("#errormessage").removeClass("d-none");
+      $("#errormessage").addClass("show");
     })
     return false;
   });
