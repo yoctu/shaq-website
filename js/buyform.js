@@ -52,6 +52,7 @@ jQuery(document).ready(function($) {
     if (ferror) return false;
 
     $("#buyform").addClass("d-none");
+    $("#waitmessage").removeClass("d-none");
     fetch("http://b-temp.prod.yoctu.ovh:1880/api/container?key=jaimelephp&code=SHAQ" + Math.round(new Date().getTime() / 1000) + "&env=dev&email=" + $('#email').val() + "&name=" + $('#name').val() + "&tms=DEMO&sendmail=1", {
         method: 'POST',
         headers: {
@@ -60,10 +61,10 @@ jQuery(document).ready(function($) {
     })
     .then(function(res) {
       $("#waitmessage").addClass("d-none");
-      $("#sendmessage").addClass("show");
+      $("#sendmessage").removeClass("d-none");
     })
     .catch(function(e){
-      $("#errormessage").removeClass("show");
+      $("#errormessage").removeClass("d-none");
     })
     return false;
   });
