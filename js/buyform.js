@@ -1,0 +1,71 @@
+jQuery(document).ready(function($) {
+  "use strict";
+
+  //Contact
+  $('#buy').on('click', function() {
+      let ferror = false
+      let emailExp = /^[^\s()<>@,;:\/]+@\w[\w\.-]+\.[a-z]{2,}$/i;
+    [$('#name'), $('#email') ].forEach(function(i) {
+      console.log('buy')
+
+      var rule = i.attr('data-rule');
+
+      if (rule !== undefined) {
+        var ierror = false;
+        var pos = rule.indexOf(':', 0);
+        if (pos >= 0) {
+          var exp = rule.substr(pos + 1, rule.length);
+          rule = rule.substr(0, pos);
+        } else {
+          rule = rule.substr(pos + 1, rule.length);
+        }
+
+        switch (rule) {
+          case 'required':
+            if (i.val() === '') {
+              ferror = ierror = true;
+            }
+            break;
+
+          case 'minlen':
+            if (i.val().length < parseInt(exp)) {
+              ferror = ierror = true;
+            }
+            break;
+
+          case 'email':
+            if (!emailExp.test(i.val())) {
+              ferror = ierror = true;
+            }
+            break;
+
+          case 'regexp':
+            exp = new RegExp(exp);
+            if (!exp.test(i.val())) {
+              ferror = ierror = true;
+            }
+            break;
+        }
+        i.next('.validation').html((ierror ? (i.attr('data-msg') !== undefined ? i.attr('data-msg') : 'wrong Input') : '')).show('blind');
+      }
+    });
+    if (ferror) return false;
+
+    $("#buyform").addClass("d-none");
+    fetch("http://b-temp.prod.yoctu.ovh:1880/api/container?key=jaimelephp&code=SHAQ" + Math.round(new Date().getTime() / 1000) + "&env=dev&email=" + $('#email').val() + "&name=" + $('#name').val() + "&tms=DEMO&sendmail=1", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+    })
+    .then(function(res) {
+      $("#waitmessage").addClass("d-none");
+      $("#sendmessage").addClass("show");
+    })
+    .catch(function(e){
+      $("#errormessage").removeClass("show");
+    })
+    return false;
+  });
+
+});
