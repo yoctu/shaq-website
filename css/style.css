@@ -1546,7 +1546,7 @@ footer .credits {
 //--//-->   FORM INPUT
 ======================================*/
 
-.form-a #waitmessage {
+#waitmessage {
   color: black;
   border: 1px solid #26a356;
   display: none;
@@ -1556,7 +1556,7 @@ footer .credits {
   margin-bottom: 15px;
 }
 
-.form-a #sendmessage {
+#sendmessage {
   color: #2eca6a;
   border: 1px solid #26a356;
   display: none;
@@ -1566,7 +1566,7 @@ footer .credits {
   margin-bottom: 15px;
 }
 
-.form-a #errormessage {
+#errormessage {
   color: red;
   display: none;
   border: 1px solid red;
@@ -1576,8 +1576,9 @@ footer .credits {
   margin-bottom: 15px;
 }
 
-.form-a #sendmessage.show,
-.form-a #errormessage.show,
+#waitmessage.show,
+#sendmessage.show,
+#errormessage.show,
 .form-a .show {
   display: block;
 }
