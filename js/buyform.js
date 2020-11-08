@@ -6,8 +6,6 @@ jQuery(document).ready(function($) {
       let ferror = false
       let emailExp = /^[^\s()<>@,;:\/]+@\w[\w\.-]+\.[a-z]{2,}$/i;
     [$('#name'), $('#email') ].forEach(function(i) {
-      console.log('buy')
-
       var rule = i.attr('data-rule');
 
       if (rule !== undefined) {
