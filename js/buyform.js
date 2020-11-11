@@ -51,7 +51,8 @@ jQuery(document).ready(function($) {
 
     $("#buyform").addClass("d-none");
     $("#waitmessage").addClass("show");
-    fetch("https://manage.shaq.us.yoctu.solutions//api/container?key=jaimelephp&code=SHAQ" + Math.round(new Date().getTime() / 1000) + "&env=dev&email=" + $('#email').val() + "&name=" + $('#name').val() + "&tms=DEMO&sendmail=1", {
+    const env = $('#typeTms').val() === "DEMO" ? 'test' : 'prod'
+    fetch("https://manage.shaq.us.yoctu.solutions//api/container?key=jaimelephp&code=SHAQ" + Math.round(new Date().getTime() / 1000) + "&env=" + env + "'&email=" + $('#email').val() + "&name=" + $('#name').val() + "&tms=" + $('#typeTms').val().toLowerCase() + "&sendmail=1", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
